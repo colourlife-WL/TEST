@@ -6,3 +6,4 @@ the char here is "test" and now the word was deleted
 test a new nethod of new branch
 new branch test53 add more information
 >>>>>>> test53
+new message
