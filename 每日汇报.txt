@@ -21,3 +21,20 @@
 		ThreadLocal:数据库连接线程安全，变量？
 	3、其他
 		wps去除首字母大写
+2018-7-26 工作汇报				
+	1、签到系统啃代码doExtSign(sign, accountUuid)；人脸识别打卡
+		主要流程：
+			（1）设置签到地址、经纬度
+			（2）根据accountUuid获取OA账号并判断是否存在该用户（return）
+			（3）判断该用户今天是否已签到|签退（return）
+			（4）设置上下班时间
+			（5）非多班倒，签到|签退时间，与迟到时间计算，并添加到签到信息中（数据库）
+			（6）上报物联网：
+				a、参数pid、cmdNo、fp获取并设置 SignReportContent，设置JsonToSignReport并转换为字符串reportString
+				b、调用上报接口JsonBaseObj reportResObj = CaiLifeAPI.report(fp, reportString, "");上报成功
+			（7）增加签到人数：
+				a、findByToday(date,sign)：jedes缓存增加人数1，同时获取签到人数count返回，如果jedis没有该key，
+					则到数据库查询count(id) count from table where signDate>=date and signType=1
+				//hincrBy:对哈希表中的指定字段加上指定增量值
+				b、jedis.hincrBy("esign:signcount" + today.substring(0, 4), today.substring(4, 10).replace("-", "") + sign.getSigntype(), 1);
+	2、Java核心技术P344-349集合学习
