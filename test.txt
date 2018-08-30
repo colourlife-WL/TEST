@@ -1,10 +1,7 @@
-<<<<<<< HEAD
 test
 his is the branch hotfix, it modify the test.txt
-=======
 the char here is "test" and now the word was deleted
 test a new nethod of new branch
 new branch test53 add more information
->>>>>>> test53
 new message
-by master
+it is a new message by other and master
